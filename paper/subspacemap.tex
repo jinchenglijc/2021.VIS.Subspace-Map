@@ -70,7 +70,9 @@
 \usepackage{amsmath}
 \usepackage{subfigure}
 \usepackage{hyperref}
+% \usepackage{ulem}
 
+\newcommand{\highlight}[1]{\textbf{#1}}
 \newcommand{\revise}[1]{\textcolor{blue}{#1}}
 \newcommand{\reviseme}[1]{\textcolor{red}{#1}}
 \newcommand{\remark}[1]{\textcolor{blue}{#1}}
@@ -96,7 +98,7 @@
 %% If you are submitting a paper to a conference for review with a double
 %% blind reviewing process, please replace the value ``0'' below with your
 %% OnlineID. Otherwise, you may safely leave it at ``0''.
-\onlineid{0}
+\onlineid{1641}
 
 %% declare the category of your paper, only shown in review mode
 \vgtccategory{Research}
@@ -107,15 +109,12 @@
 %% * evaluation
 %% * system
 %% * theory/model
-\vgtcpapertype{system}
+% \vgtcpapertype{system}
 
 \vgtcinsertpkg
 
 %% Paper title.
-\title{Subspace-Map: Interactive Subspace Exploration of High Dimensional Data with Map Metaphor}
-
-\renewcommand{\algorithmicrequire}{ \textbf{Input:}} %Use Input in the format of Algorithm
-\renewcommand{\algorithmicensure}{ \textbf{Output:}} %Use Output in the format of Algorithm
+\title{Subspace-Map: Interactive Visual Analysis for Subspace Data with a Map Metaphor}
 
 %% This is how authors are specified in the journal style
 
@@ -131,12 +130,14 @@
 %  Martha Stewart is with Martha Stewart Enterprises at Microsoft
 %  Research. E-mail: martha.stewart@marthastewart.com.
 % }
+
 % %other entries to be set up for journal
 % \shortauthortitle{Biv \MakeLowercase{\textit{et al.}}: Global Illumination for Fun and Profit}
 % %\shortauthortitle{Firstauthor \MakeLowercase{\textit{et al.}}: Paper Title}
 
 %% Abstract section.
-\abstract{Subspace analysis for high-dimensional data is extremely challenging due to the huge exploration space. We propose Subspace-Map, a novel approach with map metaphor to support interactive exploration of various subspaces in the same dataset. Each subspace is represented as a city on the map. Different cities are clustered into provinces and countries, whose features reveal the common data and dimensional patterns of its members. Users are guided to visit different regions to see how the patterns vary from one to another. They can also stop by any interested city to learn about its details. Case studies with real-world datasets and user studies are presented to demonstrate how Subspace-Map promotes an efficient and comprehensive analysis of data subspaces.%
+\abstract{
+\revise{Subspace analysis for high-dimensional data is extremely challenging due to the huge exploration space. We propose Subspace-Map, a novel approach with a map metaphor to support the interactive exploration of various subspaces. Specifically, we use a subspace search algorithm to find a moderate number of potentially valuable subspaces. Then we visualize each subspace as a city on the map. Similar cities are clustered into provinces and countries, whose features reveal the common data and dimensional patterns that can guide users in constructing desired subspaces. With the map, users can grasp an overview of the exploration space. They can also explore different subspaces via recommended tour routes. We provide various kinds of evaluation to demonstrate the effectiveness of Subspace-Map, including cases with real-world data, experiments with user feedback, and a comparison with state-of-the-art subspace data visualizations.}
 } % end of abstract
 
 %% Keywords that describe your work. Will show as 'Index Terms' in journal

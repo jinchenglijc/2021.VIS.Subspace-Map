@@ -1,0 +1,363 @@
+\begin{thebibliography}{10}
+
+\bibitem{DBLP:journals/tvcg/Bertini11}
+E.~Bertini.
+\newblock Quality metrics in high-dimensional data visualization: An overview
+  and systematization.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  17(12):2203--2212, 2011.
+
+\bibitem{DBLP:journals/vlc/Biuk-AghaiYPAFS15}
+R.~P. Biuk{-}Aghai, M.~Yang, P.~C. Pang, W.~H. Ao, S.~Fong, and Y.~Si.
+\newblock A map-like visualisation method based on liquid modelling.
+\newblock {\em Journal of Visual Languages and Computing}, 31:87--103, 2015.
+
+\bibitem{BorgGroenen2005}
+I.~Borg and P.~Groenen.
+\newblock {\em {Modern Multidimensional Scaling: Theory and Applications}}.
+\newblock Springer, 2005.
+
+\bibitem{DBLP:journals/cgf/CanoBCPSS15}
+R.~G. Cano, K.~Buchin, T.~Castermans, A.~Pieterse, W.~Sonke, and B.~Speckmann.
+\newblock Mosaic drawings and cartograms.
+\newblock {\em Computer Graphics Forum}, 34(3):361--370, 2015.
+
+\bibitem{DBLP:journals/tvcg/CaoLG16}
+N.~Cao, Y.~Lin, and D.~Gotz.
+\newblock Untangle map: Visual analysis of probabilistic multi-label data.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  22(2):1149--1163, 2016.
+
+\bibitem{carr1987scatterplot}
+D.~B. Carr, R.~J. Littlefield, W.~Nicholson, and J.~Littlefield.
+\newblock Scatterplot matrix techniques for large n.
+\newblock {\em Journal of the American Statistical Association},
+  82(398):424--436, 1987.
+
+\bibitem{DBLP:conf/ieeevast/ChenCWLYCW16}
+S.~Chen, S.~Chen, Z.~Wang, J.~Liang, X.~Yuan, N.~Cao, and Y.~Wu.
+\newblock D-map: Visual analysis of ego-centric information diffusion patterns
+  in social media.
+\newblock In {\em Proceedings of IEEE Conference on Visual Analytics Science
+  and Technology}, pages 41--50, 2016.
+
+\bibitem{DBLP:journals/tvcg/ChenLCY20}
+S.~Chen, S.~Li, S.~Chen, and X.~Yuan.
+\newblock R-map: {A} map metaphor for visualizing information reposting process
+  in social media.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  26(1):1204--1214, 2020.
+
+\bibitem{cortez2007d}
+P.~Cortez and A.~Morais.
+\newblock A data mining approach to predict forest fires using meteorological
+  data.
+\newblock In {\em Proceedings of the 13th Portuguese Conference on Artificial
+  Intelligence (EPIA 2007)}, pages 512--523, 2007.
+
+\bibitem{doi:10.1559/152304098782383034}
+H.~Couclelis.
+\newblock Worlds of information: The geographic metaphor in the visualization
+  of complex information.
+\newblock {\em Cartography and Geographic Information Systems}, 25(4):209--220,
+  1998.
+
+\bibitem{cox2000multidimensional}
+T.~F. Cox and M.~A. Cox.
+\newblock {\em Multidimensional Scaling}.
+\newblock Chapman and Hall/CRC, 2000.
+
+\bibitem{DBLP:journals/tvcg/DasguptaK10}
+A.~Dasgupta and R.~Kosara.
+\newblock Pargnostics: Screen-space metrics for parallel coordinates.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  16(6):1017--1026, 2010.
+
+\bibitem{Dua:2019}
+D.~Dua and C.~Graff.
+\newblock {UCI} machine learning repository, 2017.
+
+\bibitem{DBLP:journals/tvcg/ElmqvistDF08}
+N.~Elmqvist, P.~Dragicevic, and J.~Fekete.
+\newblock Rolling the dice: Multidimensional visual exploration using
+  scatterplot matrix navigation.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  14(6):1539--1148, 2008.
+
+\bibitem{DBLP:conf/kdd/EsterKSX96}
+M.~Ester, H.~Kriegel, J.~Sander, and X.~Xu.
+\newblock A density-based algorithm for discovering clusters in large spatial
+  databases with noise.
+\newblock In {\em Proceedings of the Second International Conference on
+  Knowledge Discovery and Data Mining}, pages 226--231, 1996.
+
+\bibitem{DBLP:conf/apvis/GansnerHK10}
+E.~R. Gansner, Y.~Hu, and S.~G. Kobourov.
+\newblock Gmap: Visualizing graphs and clusters as maps.
+\newblock In {\em Proceedings of IEEE Pacific Visualization Symposium}, pages
+  201--208, 2010.
+
+\bibitem{grunbaum1977tilings}
+B.~Gr{\"u}nbaum and G.~C. Shephard.
+\newblock Tilings by regular polygons.
+\newblock {\em Mathematics Magazine}, 50(5):227--247, 1977.
+
+\bibitem{grunbaum1987tilings}
+B.~Gr{\"u}nbaum and G.~C. Shephard.
+\newblock {\em Tilings and patterns}.
+\newblock Courier Dover Publications, 1987.
+
+\bibitem{DBLP:journals/ivs/Guo03}
+D.~Guo.
+\newblock Coordinating computational and visual approaches for interactive
+  feature selection and multivariate clustering.
+\newblock {\em Information Visualization}, 2(4):232--246, 2003.
+
+\bibitem{DBLP:journals/cgf/HograferHS20}
+M.~Hogr{\"{a}}fer, M.~Heitzler, and H.~Schulz.
+\newblock The state of the art in map-like visualization.
+\newblock {\em Computer Graphics Forum}, 39(3):647--674, 2020.
+
+\bibitem{huber1985projection}
+P.~J. Huber.
+\newblock Projection pursuit.
+\newblock {\em The Annals of Statistics}, pages 435--475, 1985.
+
+\bibitem{DBLP:journals/vc/Inselberg85}
+A.~Inselberg.
+\newblock The plane with parallel coordinates.
+\newblock {\em The Visual Computer}, 1(2):69--91, 1985.
+
+\bibitem{DBLP:conf/ieeevast/JackleHBKS17}
+D.~J{\"{a}}ckle, M.~Hund, M.~Behrisch, D.~A. Keim, and T.~Schreck.
+\newblock Pattern trails: Visual analysis of pattern transitions in subspaces.
+\newblock In {\em Proceedings of IEEE Conference on Visual Analytics Science
+  and Technology}, pages 1--12, 2017.
+
+\bibitem{DBLP:journals/cgf/JohanssonC08}
+J.~Johansson and M.~D. Cooper.
+\newblock A screen space quality method for data abstraction.
+\newblock {\em Computer Graphics Forum}, 27(3):1039--1046, 2008.
+
+\bibitem{DBLP:journals/tvcg/JohanssonJ09}
+S.~Johansson and J.~Johansson.
+\newblock Interactive dimensionality reduction through user-defined
+  combinations of quality metrics.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  15(6):993--1000, 2009.
+
+\bibitem{DBLP:journals/tkdd/KriegelKZ09}
+H.~Kriegel, P.~Kr{\"{o}}ger, and A.~Zimek.
+\newblock Clustering high-dimensional data: {A} survey on subspace clustering,
+  pattern-based clustering, and correlation clustering.
+\newblock {\em ACM Transactions on Knowledge Discovery from Data},
+  3(1):1:1--1:58, 2009.
+
+\bibitem{liu2007vdbscan}
+P.~Liu, D.~Zhou, and N.~Wu.
+\newblock Vdbscan: Varied density based spatial clustering of applications with
+  noise.
+\newblock In {\em Proceedings of 2007 International Conference on Service
+  Systems and Service Management}, pages 1--4, 2007.
+
+\bibitem{DBLP:journals/tmm/MaLZW16}
+C.~Ma, Y.~Liu, G.~Zhao, and H.~Wang.
+\newblock Visualizing and analyzing video content with interactive scalable
+  maps.
+\newblock {\em IEEE Transactions on Multimedia}, 18(11):2171--2183, 2016.
+
+\bibitem{DBLP:journals/tvcg/MashimaKH12}
+D.~Mashima, S.~G. Kobourov, and Y.~Hu.
+\newblock Visualizing dynamic data with maps.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  18(9):1424--1437, 2012.
+
+\bibitem{DBLP:journals/pvldb/MullerGAS09}
+E.~M{\"{u}}ller, S.~G{\"{u}}nnemann, I.~Assent, and T.~Seidl.
+\newblock Evaluating clustering in subspace projections of high dimensional
+  data.
+\newblock {\em Proceedings of the VLDB Endowment}, 2(1):1270--1281, 2009.
+
+\bibitem{DBLP:journals/tvcg/NamM13}
+J.~E. Nam and K.~Mueller.
+\newblock Tripadvisor\({}^{\mbox{n-d}}\): {A} tourism-inspired high-dimensional
+  space exploration framework with overview and detail.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  19(2):291--305, 2013.
+
+\bibitem{DBLP:conf/iv/Nesbitt04}
+K.~V. Nesbitt.
+\newblock Getting to more abstract places using the metro map metaphor.
+\newblock In {\em Proceedings of the 8th International Conference on
+  Information Visualization}, pages 488--493. {IEEE} Computer Society, 2004.
+
+\bibitem{DBLP:conf/apvis/NhonW14}
+D.~T. Nhon and L.~Wilkinson.
+\newblock Scagexplorer: Exploring scatterplots by their scagnostics.
+\newblock In {\em Proceedings of IEEE Pacific Visualization Symposium}, pages
+  73--80, 2014.
+
+\bibitem{DBLP:conf/infovis/PengWR04}
+W.~Peng, M.~O. Ward, and E.~A. Rundensteiner.
+\newblock Clutter reduction in multi-dimensional data visualization using
+  dimension reordering.
+\newblock In {\em Proceedings of IEEE Symposium on Information Visualization},
+  pages 89--96, 2004.
+
+\bibitem{DBLP:journals/cgf/PreinerSKSM20}
+R.~Preiner, J.~Schmidt, K.~Kr{\"{o}}sl, T.~Schreck, and G.~Mistelbauer.
+\newblock Augmenting node-link diagrams with topographic attribute maps.
+\newblock {\em Computer Graphics Forum}, 39(3):369--381, 2020.
+
+\bibitem{DBLP:journals/tvcg/SarvghadTM17}
+A.~Sarvghad, M.~Tory, and N.~Mahyar.
+\newblock Visualizing dimension coverage to support exploratory analysis.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  23(1):21--30, 2017.
+
+\bibitem{DBLP:journals/ivs/SeoS05}
+J.~Seo and B.~Shneiderman.
+\newblock A rank-by-feature framework for interactive exploration of
+  multidimensional data.
+\newblock {\em Proceedings of IEEE Symposium on Information Visualization},
+  4(2):96--113, 2005.
+
+\bibitem{DBLP:journals/cgf/SipsNLH09}
+M.~Sips, B.~Neubert, J.~P. Lewis, and P.~Hanrahan.
+\newblock Selecting good views of high-dimensional data using class
+  consistency.
+\newblock {\em Computer Graphics Forum}, 28(3):831--838, 2009.
+
+\bibitem{DBLP:conf/infovis/Skupin00}
+A.~Skupin.
+\newblock From metaphor to method: Cartographic perspectives on information
+  visualization.
+\newblock In {\em Proceedings of IEEE Symposium on Information Visualization},
+  pages 91--97, 2000.
+
+\bibitem{doi:10.1559/152304003100011081}
+A.~Skupin and S.~I. Fabrikant.
+\newblock Spatialization methods: A cartographic research agenda for
+  non-geographic information visualization.
+\newblock {\em Cartography and Geographic Information Science}, 30(2):99--119,
+  2003.
+
+\bibitem{spelke1990principles}
+E.~S. Spelke.
+\newblock Principles of object perception.
+\newblock {\em Cognitive science}, 14(1):29--56, 1990.
+
+\bibitem{DBLP:journals/tvcg/StahnkeDMT16}
+J.~Stahnke, M.~D{\"{o}}rk, B.~M{\"{u}}ller, and A.~Thom.
+\newblock Probing projections: Interaction techniques for interpreting
+  arrangements and errors of dimensionality reductions.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  22(1):629--638, 2016.
+
+\bibitem{DBLP:conf/ieeevast/TatuAESTMK09}
+A.~Tatu, G.~Albuquerque, M.~Eisemann, J.~Schneidewind, H.~Theisel, M.~A.
+  Magnor, and D.~A. Keim.
+\newblock Combining automated analysis and visualization techniques for
+  effective exploration of high-dimensional data.
+\newblock In {\em Proceedings of IEEE Conference on Visual Analytics Science
+  and Technology}, pages 59--66, 2009.
+
+\bibitem{DBLP:conf/ieeevast/TatuMFBSSK12}
+A.~Tatu, F.~Maass, I.~F{\"{a}}rber, E.~Bertini, T.~Schreck, T.~Seidl, and D.~A.
+  Keim.
+\newblock Subspace search and visualization to make sense of alternative
+  clusterings in high-dimensional data.
+\newblock In {\em Proceedings of IEEE Conference on Visual Analytics Science
+  and Technology}, pages 63--72, 2012.
+
+\bibitem{DBLP:journals/tvcg/TurkayFH11}
+C.~Turkay, P.~Filzmoser, and H.~Hauser.
+\newblock Brushing dimensions - {A} dual visual analysis model for
+  high-dimensional data.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  17(12):2591--2599, 2011.
+
+\bibitem{DBLP:journals/tvcg/TurkayLLH12}
+C.~Turkay, A.~Lundervold, A.~J. Lundervold, and H.~Hauser.
+\newblock Representative factor generation for the interactive visual analysis
+  of high-dimensional data.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  18(12):2621--2630, 2012.
+
+\bibitem{DBLP:conf/apvis/WatanabeWNTF15}
+K.~Watanabe, H.~Wu, Y.~Niibe, S.~Takahashi, and I.~Fujishiro.
+\newblock Biclustering multivariate data for correlated subspace mining.
+\newblock In {\em Proceedings of IEEE Pacific Visualization Symposium}, pages
+  287--294, 2015.
+
+\bibitem{DBLP:journals/tvcg/WenskovitchCRHL18}
+J.~E. Wenskovitch, I.~Crandell, N.~Ramakrishnan, L.~House, S.~Leman, and
+  C.~North.
+\newblock Towards a systematic combination of dimension reduction and
+  clustering in visual analytics.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  24(1):131--141, 2018.
+
+\bibitem{DBLP:conf/infovis/WilkinsonAG05}
+L.~Wilkinson, A.~Anand, and R.~L. Grossman.
+\newblock Graph-theoretic scagnostics.
+\newblock In {\em Proceedings of IEEE Symposium on Information Visualization},
+  page~21, 2005.
+
+\bibitem{DBLP:journals/tvcg/WilkinsonAG06}
+L.~Wilkinson, A.~Anand, and R.~L. Grossman.
+\newblock High-dimensional visual analytics: Interactive exploration guided by
+  pairwise views of point distributions.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  12(6):1363--1372, 2006.
+
+\bibitem{wold1987principal}
+S.~Wold, K.~Esbensen, and P.~Geladi.
+\newblock Principal component analysis.
+\newblock {\em Chemometrics and Intelligent Laboratory Systems}, 2(1-3):37--52,
+  1987.
+
+\bibitem{DBLP:journals/tvcg/WongsuphasawatM16}
+K.~Wongsuphasawat, D.~Moritz, A.~Anand, J.~D. Mackinlay, B.~Howe, and J.~Heer.
+\newblock Voyager: Exploratory analysis via faceted browsing of visualization
+  recommendations.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  22(1):649--658, 2016.
+
+\bibitem{DBLP:conf/chi/WongsuphasawatQ17}
+K.~Wongsuphasawat, Z.~Qu, D.~Moritz, R.~Chang, F.~Ouk, A.~Anand, J.~D.
+  Mackinlay, B.~Howe, and J.~Heer.
+\newblock Voyager 2: Augmenting visual analysis with partial view
+  specifications.
+\newblock In {\em Proceedings of the 2017 {CHI} Conference on Human Factors in
+  Computing Systems}, pages 2648--2659, 2017.
+
+\bibitem{DBLP:conf/infovis/YangPWR03}
+J.~Yang, W.~Peng, M.~O. Ward, and E.~A. Rundensteiner.
+\newblock Interactive hierarchical dimension ordering, spacing and filtering
+  for exploration of high dimensional datasets.
+\newblock In {\em Proceedings of IEEE Symposium on Information Visualization},
+  pages 105--112, 2003.
+
+\bibitem{DBLP:journals/tvcg/YuanRWG13}
+X.~Yuan, D.~Ren, Z.~Wang, and C.~Guo.
+\newblock Dimension projection matrix/tree: Interactive subspace visual
+  exploration and analysis of high dimensional data.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  19(12):2625--2633, 2013.
+
+\bibitem{DBLP:conf/apvis/ZhangMM12}
+Z.~Zhang, K.~T. McDonnell, and K.~Mueller.
+\newblock A network-based interface for the exploration of high-dimensional
+  data spaces.
+\newblock In {\em Proceedings of IEEE Pacific Visualization Symposium}, pages
+  17--24, 2012.
+
+\bibitem{DBLP:journals/tvcg/ZhangMZM15}
+Z.~Zhang, K.~T. McDonnell, E.~Zadok, and K.~Mueller.
+\newblock Visual correlation analysis of numerical and categorical data on the
+  correlation map.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  21(2):289--303, 2015.
+
+\end{thebibliography}

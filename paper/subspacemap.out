@@ -1,0 +1,29 @@
+\BOOKMARK [1][]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][]{section.2}{Related Work}{}% 2
+\BOOKMARK [2][]{subsection.3}{Dimension Selection in High-Dimensional Data}{section.2}% 3
+\BOOKMARK [2][]{subsection.4}{Subspace Mining and Visualization}{section.2}% 4
+\BOOKMARK [2][]{subsection.5}{Map Metaphor for Non-Spatial Data Visualization}{section.2}% 5
+\BOOKMARK [1][]{section.6}{The Design of Subspace-Map}{}% 6
+\BOOKMARK [2][]{subsection.7}{Design Considerations}{section.6}% 7
+\BOOKMARK [2][]{subsection.8}{Design Choices and Decisions}{section.6}% 8
+\BOOKMARK [2][]{subsection.9}{The Map Metaphors}{section.6}% 9
+\BOOKMARK [3][-]{subsubsection.11}{Geography}{subsection.9}% 10
+\BOOKMARK [3][-]{subsubsection.12}{Regions}{subsection.9}% 11
+\BOOKMARK [3][-]{subsubsection.13}{Transportation}{subsection.9}% 12
+\BOOKMARK [1][]{section.14}{Subspace-Map Construction}{}% 13
+\BOOKMARK [2][]{subsection.15}{Data Preprocessing}{section.14}% 14
+\BOOKMARK [2][]{subsection.16}{Map Construction}{section.14}% 15
+\BOOKMARK [3][-]{subsubsection.18}{Anchor Point Location and Traversal Order}{subsection.16}% 16
+\BOOKMARK [3][-]{subsubsection.19}{Grid Tiling}{subsection.16}% 17
+\BOOKMARK [3][-]{subsubsection.20}{Additional Map Metaphors}{subsection.16}% 18
+\BOOKMARK [1][]{section.22}{Subspace-Map System}{}% 19
+\BOOKMARK [2][]{subsection.23}{Map View}{section.22}% 20
+\BOOKMARK [2][]{subsection.25}{Subspace List View}{section.22}% 21
+\BOOKMARK [2][]{subsection.27}{Map Detail View}{section.22}% 22
+\BOOKMARK [2][]{subsection.28}{Exploration Workflow}{section.22}% 23
+\BOOKMARK [1][]{section.29}{Evaluation}{}% 24
+\BOOKMARK [2][]{subsection.30}{Case 1: Forest Fires Data}{section.29}% 25
+\BOOKMARK [2][]{subsection.34}{Case 2: Glass Identification Data}{section.29}% 26
+\BOOKMARK [2][]{subsection.36}{Comparison with State-of-the-Art Methods}{section.29}% 27
+\BOOKMARK [1][]{section.38}{Discussion}{}% 28
+\BOOKMARK [1][]{section.39}{Conclusion}{}% 29
