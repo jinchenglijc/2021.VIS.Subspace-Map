@@ -1,0 +1,44 @@
+\section{Related Work}
+\label{sec:related work}
+
+In this section, we first take a look at the general high-dimensional data visualizations to see how people extract the important dimensions. Then we introduce the subspace mining techniques along with the related visualization methods. We also review the visualizations using the map metaphors.
+
+\subsection{Dimension Selection in High-Dimensional Data}
+
+Dimension selection is an important task that seeks to reduce dimensionality while maintaining useful characteristics. It requires the analyst to have rich experience with the data, which is seldom the case in data analysis. A lot of research works have been carried out to address this challenge.
+They can be divided into three categories.
+% They can be divided into three categories based on their underlying strategies.
+
+The first type of method is based on the similarity between dimensions. In the early research of parallel coordinates~\cite{DBLP:journals/vc/Inselberg85}, Yang et al.~\cite{DBLP:conf/infovis/YangPWR03} proposed to cluster the similar dimensions and extract a representative dimension for each cluster, which is the centroid or average of the cluster members. Turkay et al.~\cite{DBLP:journals/tvcg/TurkayLLH12} applied dimensionality reduction and statistical modeling to generate the representative factors. Zhang et al.~\cite{DBLP:conf/apvis/ZhangMM12, DBLP:journals/tvcg/ZhangMZM15} utilized correlation strengths and carried out more delicate rules for dimension clustering.
+
+The second type aims at selecting important dimensions suggested by quality metrics. The Rank-by-Feature Framework~\cite{DBLP:journals/ivs/SeoS05} allows to rank dimensions based on user-specified statistical criteria. It is also applied to select dimension pairs in a scatterplot matrix (SPLOM)~\cite{carr1987scatterplot} and order axes in parallel coordinates. Some measures of pattern salience in scatterplots~\cite{DBLP:journals/cgf/JohanssonC08, DBLP:journals/cgf/SipsNLH09, DBLP:conf/ieeevast/TatuAESTMK09} have been used to rank the plots in a SPLOM~\cite{DBLP:journals/ivs/Guo03, DBLP:conf/apvis/NhonW14} to improve the exploration efficiency, including the well-known Scagnostics~\cite{DBLP:conf/infovis/WilkinsonAG05, DBLP:journals/tvcg/WilkinsonAG06}. For parallel coordinates, metrics are also proposed to detect the inter-axis patterns~\cite{DBLP:journals/cgf/JohanssonC08, DBLP:journals/tvcg/DasguptaK10} and rank different ordering schemes~\cite{DBLP:conf/infovis/PengWR04, DBLP:journals/tvcg/JohanssonJ09}. We refer to~\cite{DBLP:journals/tvcg/Bertini11} for a comprehensive review. Our method falls into this type, where we extract important dimensions by examining whether they dominate the pattern.
+
+As opposed to the automatic methods, the third type interactively selects dimensions without making any assumptions about what is interesting. Voyager~\cite{DBLP:journals/tvcg/WongsuphasawatM16} and its advanced version~\cite{DBLP:conf/chi/WongsuphasawatQ17} allow free selection from a complete list and recommend dimensions that may be overlooked. Sarvghad et al.~\cite{DBLP:journals/tvcg/SarvghadTM17} achieved the same goal by simply showing the coverage of the dimensions explored. Turkay et al.~\cite{DBLP:journals/tvcg/TurkayFH11} proposed to brush dimensions in the projection to support dual space analysis. It was later extended into a more extensible framework by Yuan et al.~\cite{DBLP:journals/tvcg/YuanRWG13}, in which the exploration process is organized in a hierarchical way.
+
+% Our method falls into the second type, where we extract important dimensions by examining whether the dimensions dominate the pattern.
+
+\subsection{Subspace Mining and Visualization}
+
+Dimension selection methods work well in identifying a small number of subspaces or low-dimensional subspaces. Subspace mining techniques become indispensable when it comes to high-dimensional cases. They are designed to find subspaces with interesting patterns, which in most cases are hidden clusters. Hence, they are also called subspace clustering techniques~\cite{DBLP:journals/tkdd/KriegelKZ09, DBLP:journals/pvldb/MullerGAS09}.
+% In the past few decades, various kinds of methods~\cite{DBLP:journals/tkdd/KriegelKZ09, DBLP:journals/pvldb/MullerGAS09} have been developed in this domain, such as CLIQUE~\cite{DBLP:conf/sigmod/AgrawalGGR98} and SURFING~\cite{DBLP:conf/icdm/BaumgartnerPKKK04}.
+
+% Like other heuristic algorithms, subspace clustering produces a large number of results and easily causes redundancy.
+Subspace clustering often produces a large number of results and easily causes redundancy.
+Tatu et al.~\cite{DBLP:conf/ieeevast/TatuMFBSSK12} developed a visual analytics system to help users organize the redundant subspace candidates.
+It shows the relationship of all candidates by comparing their dimension similarity. 
+% It shows the relationship of all candidates in the projection by comparing their dimension similarity. 
+TripAdvisor$^{ND}$~\cite{DBLP:journals/tvcg/NamM13} also shows a projection that measures dimension differences.
+Pattern Trails~\cite{DBLP:conf/ieeevast/JackleHBKS17} adopts a 1D layout to help users trace data changes across different subspaces.
+% J{\"{a}}ckle et al.~\cite{DBLP:conf/ieeevast/JackleHBKS17} proposed Pattern Trails, which adopts a 1D layout to help users trace data changes across different subspaces.
+We provide a complete comparison with these methods in~\autoref{section:evaluation}. Watanabe et al.~\cite{DBLP:conf/apvis/WatanabeWNTF15} did not depend on subspace clustering, but proposed a bi-clustering approach to divide the data into multiple complementary subparts.
+
+% Among the above methods, TripAdvisor$^{ND}$~\cite{DBLP:journals/tvcg/NamM13} and Tatu et al.'s work~\cite{DBLP:conf/ieeevast/TatuMFBSSK12} both have a main view similar to our Subspace-Map. But instead of directly displaying projections, Subspace-Map uses a more compact layout to avoid visual occlusion. Pattern Trails~\cite{DBLP:conf/ieeevast/JackleHBKS17} shares with us the same goal to reveal the impacts of dimensions on data structures. However, it only studies projected data changes that suffer from the information loss and are susceptible to geometric transformations, while we focus on structural differences in the original subspaces. Besides, 1D alignments are much less competent in visualizing relationships when compared to 2D layouts.
+
+\subsection{Map Metaphor for Non-Spatial Data Visualization}
+
+Maps are a very popular and important technique to depict the spatial relationships between elements. Many different types of maps, such as choropleth map and road map, have been created to convey a variety of information. As a familiar and easy-to-understand way, it can also be used as a carrier for non-spatial information. In the field of visualization, how to create non-geographic visualizations with the help of geographic metaphors has also been studied~\cite{doi:10.1559/152304098782383034} and several attempts have been made~\cite{DBLP:conf/infovis/Skupin00,doi:10.1559/152304003100011081}.
+
+GMap~\cite{DBLP:conf/apvis/GansnerHK10} is a seminal work to accelerates research in this field. It was designed to highlight communities in a network, and was later applied to the analysis of dynamic graphs~\cite{DBLP:journals/tvcg/MashimaKH12}, video content~\cite{DBLP:journals/tmm/MaLZW16}, etc. Cao et al.~\cite{DBLP:journals/tvcg/CaoLG16} proposed to visualize multi-label data with ternary plots in uniform triangular grids. Map metaphors are also widely used in the social media domain. Chen et al.~\cite{DBLP:conf/ieeevast/ChenCWLYCW16} introduced D-Map for analyzing user-centric information diffusion patterns.
+% D-Map+~\cite{DBLP:journals/tist/ChenCWLWY19} further supports the analysis of event-centric information diffusion patterns. 
+% They also proposed E-Map~\cite{DBLP:conf/ieeevast/ChenCLYL017} which integrates more geographic concepts like cities and rivers to depict the event evolution.
+Chen et al.~\cite{DBLP:journals/tvcg/ChenLCY20} proposed R-Map for analyzing the information reposting process. Recently, a survey has been conducted~\cite{DBLP:journals/cgf/HograferHS20} to give an overview of the literature on map‐like visualizations. Targeting at subspace visual analysis, Subspace-Map introduces abundant map metaphors and supports multi-level exploration.

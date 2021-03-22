@@ -1,0 +1,165 @@
+\section{Subspace-Map Construction}
+\label{sect:S-Map Construction}
+% In this section, we first describe how we process the raw high-dimensional data to sample subspaces and extract the necessary information. We then present the steps of map construction.
+
+In this section, we describe the processing of the data and the steps for map construction.
+
+\subsection{Data Preprocessing}
+\label{subsection:data_preprocessing}
+The first step in data preprocessing is normalization, which is an essential step to make the dimensions comparable.
+We then sample the subspaces, measure the similarity between subspace samples, cluster similar subspaces together, and extract features such as data stability, dimension stability, etc.
+% In order to deal with a large number of subspaces, we downsample the subspaces to make them reach an acceptable size. After that, we apply several methods such as clustering to extract useful features.
+
+\textbf{Subspace sampling.} To provide a good overview of the entire exploration space, we need to ensure the diversity and representativeness of the subspace samples. For this purpose, we keep the sampling frequency to remain the same for each dimension combination and each dimension.
+
+More specifically, for sampling $m$ subspaces from a $d$-dimensional dataset, we firstly add the $d$-dimensional subspace to our sampling results as it characterizes the full-dimensional space. We do not consider 1D subspaces due to their simplicity. For $k$-dimensional subspaces where $k$ ranges from 2 to $d-1$, we use inverse transform sampling to obtain the number of samples $m_k$ in $k$-dimensional subspaces ($\sum_{i=2}^{d-1}m_i=m-1$). Then we randomly sample $m_k$ subspaces from $\binom{d}{k}$ $k$-dimensional subspaces and add them to the results.
+
+\textbf{Similarity measure.} Even with normalization, traditional similarity measures such as Euclidean distance are still not suitable for subspace comparison, because variations in subspace dimensionality affect the distance calculation. J{\"{a}}ckle et al.~\cite{DBLP:conf/ieeevast/JackleHBKS17} proposed to compare the projected distance, which inevitably suffers from information loss.
+
+Similar to the method adopted by Tatu et al.~\cite{DBLP:conf/ieeevast/TatuMFBSSK12}, we use the $k$-NN ($k$-Nearest Neighbors) topology to measure similarity. Specifically, we compute the $k$-NN list for each data item.
+% The similarity between the two subspaces is evaluated by the average percentage of agreement between the $k$-NN lists of all corresponding data items.
+The similarity between the same data item in two subspaces is evaluated by the percentage of agreement between their $k$-NN lists. By averaging the similarity of all data items, we obtain the similarity between the two subspaces, which can be further converted to distance by subtracting it from 1. In this way, we get the distance matrix of all sampled subspaces.
+We can also compute the $k$-NN list for each subspace by sorting the corresponding row or column of the distance matrix in ascending order and selecting the first $k$ subspaces. Note that the parameter $k$ for data items and subspaces is not the same, and does not need to be equal. To distinguish, we denote $k$ for data items as $k_d$ and $k$ for subspaces as $k_s$. They are set based on the number of data items and the number of subspaces, respectively.
+% Based on the $k_d$-NN list of data items, distance matrix of subspaces, and $k_s$-NN list of subspaces, we extract the following features from the data.
+
+\textbf{Clustering.}
+% Clustering is a common method to explore the structure and variation in high-dimensional data.
+To obtain information at different granularities, we hierarchically cluster subspaces by DBSCAN~\cite{DBLP:conf/kdd/EsterKSX96}, which clusters points in density regions together and marks points in low-density regions as outliers. DBSCAN has two parameters and we currently determine them manually based on the number of input subspaces. The basic criterion is to select the parameters when the output is relatively stable, i.e. perturbations in the parameters do not affect the results. In the future, we may apply heuristic methods~\cite{DBLP:conf/kdd/EsterKSX96, liu2007vdbscan} to help specify parameters quickly.
+
+The clustering is up to 2 levels. To avoid visual intersection of clusters and to improve readability and layout interpretation~\cite{DBLP:journals/tvcg/WenskovitchCRHL18}, we compute the projection by applying MDS~\cite{cox2000multidimensional} to the distance matrix and perform DBSCAN on the projection. We use MDS because it globally preserves the pairwise distance between subspaces. Other dimensionality reduction techniques are also optional.
+% This operation produces first-level clusters and first-level outliers. We then proceed to execute DBSCAN on the first-level clusters to obtain second-level clusters and second-level outliers.
+This operation produces first-level clusters and first-level outliers that correspond to countries and islands in the map. We then proceed to execute DBSCAN on the first-level clusters to obtain second-level clusters and second-level outliers, which correspond to provinces and municipalities.
+
+% \textbf{Hierarchical structure} Clustering is a common method to explore structures and variations in high-dimensional data. In order to obtain information at different granularities, we hierarchically cluster subspaces by DBSCAN~\cite{DBLP:conf/kdd/EsterKSX96}, which enables to cluster points in density regions together and mark points in low-density regions as outliers. The clustering is up to 2 levels. 
+% To avoid the visual intersection of clusters and improve readability and layout interpretation~\cite{DBLP:journals/cgf/JoiaPN15, DBLP:journals/tvcg/WenskovitchCRHL18}, we first calculate the projection by applying MDS~\cite{cox2000multidimensional} to the distance matrix, and then perform DBSCAN on the projection. 
+% We first perform DBSCAN on all subspaces to obtain first-level clusters and first-level outliers corresponding to countries and islands on our map. We then proceed to execute DBSCAN on the first-level clusters to generate second-level clusters and second-level outliers, which correspond to provinces and municipalities, respectively.
+
+\textbf{Data stability.} For the data item in a subspace, the stability is obtained by averaging the percentage of agreement on the $k_d$-NN list for the corresponding data item in the $k_s$-NN subspaces for that subspace. For the data item in a subspace cluster, its stability is calculated by averaging the stability in each subspace. With the stability, we can find out which data items change slightly and which change drastically.
+% \textbf{Data stability} For each data item in the subspace, the stability is obtained by averaging the Jaccard similarity on the $k_d$-NN lists of the corresponding data item in the $k_s$-NN subspaces. For subspace clusters, it is calculated by averaging the stability of each subspace. Through it, we can discover which data items change slightly and which data items change drastically.
+
+\textbf{Dimension stability.} The dimensions contained in a subspace determine its pattern. We want to figure out why a subspace is similar to others and why a subspace cluster is generated. For a subspace, we count the number of co-occurrences and co-non-occurrences of each dimension between that subspace and its $k_s$-NN subspaces, and divide by $k_s$ to obtain the dimension stability. For a subspace cluster, we count the number of occurrences of each dimension and divide by the number of subspaces it contains.
+
+\textbf{Featured dimensions.} Based on dimension stability, we set high and low thresholds to find commonly included dimensions and commonly excluded dimensions for subspace clusters. They are defined as featured dimensions.
+% \textbf{Featured dimensions} Based on dimension stability, we set high and low thresholds to find commonly included dimensions, commonly excluded dimensions, and normal dimensions for subspace clusters.
+
+\textbf{Representative subspaces.} In order to show the main features of a cluster, we select the subspace with the highest average similarity with other subspaces as its representative subspace.
+% The representative subspaces of the country and the province are called the national capital and the provincial capital, respectively.
+
+% We need to know the locations of the countries and islands before constructing the map. To achieve that, we set an anchor point for each country and island. For an island representing a single subspace, the anchor point is the subspace and its location is the location of the island. For a country that represents a cluster of subspaces, we set the anchor point as the national capital. After that, we need to determine the arrangement order and strategy of other subspaces. Here we discuss how to determine the location of the anchor points and the order in which subspaces are arranged in a country. We put the arrangement strategy part in the next subsection.
+
+% position of anchor points
+% \textbf{Location of anchor points} We need to know the locations of the countries and islands before constructing the map. We set an anchor point for each country and island. For an island representing a single subspace, the anchor point is the subspace. For a country that represents a cluster of subspaces, we set the anchor point as the national capital. We extract their corresponding locations from the projection, which has been calculated in the hierarchical clustering part.
+
+% % 遍历顺序（国家的遍历顺序，国家内城市的遍历顺序）
+% \textbf{Traversal order} We need to determine the traversal order of subspaces within a country to arrange them on the map. Before that, in order to avoid conflicts with neighboring countries or islands on space occupation, we also need to determine the traversal order of countries and islands. To this end, we prepare two lists, the existing list and the remaining list, to store the existing and non-existing elements in the traversal order list. In the initial state, the existing list is empty, while the remaining list contains all countries and islands. We first find an element with the smallest average distance from others in the remaining list and add it to the existing list. After that, we continually find the element with the smallest average distance from all elements in the existing list and add it to the existing list until the remaining list is empty. The method of determining the traversal order of subspaces in a country is divided into two steps, namely, determining the traversal order of provinces and municipalities and determining the traversal order of cities in a province. Each step is similar to determining the traversal order of countries and islands.
+
+\subsection{Map Construction}
+
+\begin{figure*}[tb]
+\centering
+\includegraphics[width=1\linewidth]{layout}
+% \caption{Subspace-Map construction process. After fitting the anchor points to hexagonal grids, we build countries one by one by maintaining a location queue that stores the currently available grids for placing subspaces. We tune the layout and add additional metaphors to make the constructed map more compact and informative.}
+\caption{The construction process of Subspace-Map: (a) initialize the location queue; (b) update the queue after each placement; (c) reset the queue for a new cluster; (d) continuously tiling; (e) reduce redundant map space; and (f) render map metaphors.}
+\label{fig:layout}
+\end{figure*}
+
+Subspace-Map is a hexagonal map. The construction of Subspace-Map first places the anchor points on hexagonal grids, and then places other subspaces according to the traversal order as well as the available grids (\autoref{fig:layout}).
+
+\subsubsection{Anchor Point Location and Traversal Order}
+We start by placing anchor points on the map. The anchor point of a country is the national capital, and the anchor point of an island is itself. Their location is determined from the projection, which has been computed in the clustering.
+
+% 遍历顺序（国家的遍历顺序，国家内城市的遍历顺序）
+Next we determine the order in which countries and islands are built, i.e., the traversal order of anchor points. A traversal list is created. We first add to the list the point that has the smallest average distance from the other points. We continue by adding the point with the smallest average distance from all the points in the list. Determining the traversal order of cities in a country is the same as determining the traversal order of anchor points.
+
+% Next we determine the order in which countries and islands are built, i.e., the traversal order of anchor points. We first find the point with the smallest average distance from the other points and add it to the traversal list. We continue to find the point that has the smallest average distance from all the points in the list and add it to the list, until all the points are in the list. Determining the traversal order of cities in a country is the same as determining the traversal order of anchor points.
+
+% We then need to determine the traversal order of countries and islands to avoid conflicts over space occupation. For this purpose, we prepare two lists, the existing list $L_e$ and the remaining list $L_r$, to store the elements that currently exist and do not exist in the traversal order. In the initial state, $L_e$ is empty, while $L_r$ contains all countries and islands. Here countries are represented by their representative subspaces. We first find an element in $L_r$ with the smallest average distance from other elements and add it to $L_e$. After that, we continue to find the element from $L_r$ that has the smallest average distance from all elements in $L_e$ and add it to $L_e$ until $L_r$ is empty.
+
+% In order to arrange the subspaces within a country, we next need to determine their traversal order. The process is divided into two steps: determining the traversal order of provinces and municipalities and determining the traversal order of cities in the province. Each step is similar to determining the traversal order of countries and islands.
+
+\subsubsection{Grid Tiling}
+% 把岛屿和首都的位置画出来
+% fit to hexagon grids
+% 确定forbidden zone并注明它会在填充每一个grid后都更新
+% 根据顺序，一个一个地排布（两种情况，属于和不属于同一个省）
+% fine tune（）
+After placing the anchor points, we place the cities in each country according to their traversal order. We use a location queue to maintain the currently available grids (\autoref{fig:layout}a). For a used grid, we add its adjacent grids that meet the following two conditions to the queue in clockwise order: (1) the grid is not occupied by other subspaces, and (2) the grid is not a disabled grid. Disabled grids are set up to avoid adjacency between different countries and islands (Algorithm~\autoref{alg:layout}-Step 1).
+
+% After placing the anchor points, we place the cities in each country according to their traversal order. We use a location queue to maintain the currently available grids (\autoref{fig:layout}a). For a used grid, we add its adjacent grids that meet the following two conditions to the queue in clockwise order: (1) the grid is not occupied by other subspaces, and (2) the grid is not a disabled grid. Disabled grids are set up to avoid adjacency between different countries and islands (Algorithm~\autoref{alg:layout}-Step 1).
+
+The location queue will be continuously updated according to the clustering relationship between two adjacent subspaces in the traversal order (Algorithm~\autoref{alg:layout}-Step 2). If they belong to the same second-level cluster, the queue is updated as usual (\autoref{fig:layout}b). If not, the current queue is cleared and a new one is rebuilt based on the subspace to be placed (\autoref{fig:layout}c). We do not rebuild the queue when a second-level outlier is encountered. Second-level outliers are usually clustered at the end of the traversal order, and rebuilding the queue will result in the country having a long tail.
+
+% The location queue will be continuously updated according to the clustering relationship among subspaces as the country builds (Algorithm~\autoref{alg:layout}-Step 2). More specifically, we check whether two adjacent subspaces in the traversal order belong to the same second-level cluster. If it does, the location queue is updated as usual (\autoref{fig:layout}b). If not, the current location queue is cleared and a new one is rebuilt based on the subspace that will be placed (\autoref{fig:layout}c). When encountering second-level outliers, we do not rebuild the location queue, because they usually cluster at the end of the traversal order determined based on similarity, thus causing the country to have a long tail.
+
+After all the countries and islands are built (\autoref{fig:layout}d), we make the layout compact (\autoref{fig:layout}e). We remove empty rows and columns while ensuring that countries and islands do not border. Then we center and enlarge the remaining grids to fill the entire view space (Algorithm~\autoref{alg:layout}-Step 3). In the compact layout, the relative position between countries and islands have changed, resulting in the similarity not being well conveyed by position. To cope with this problem, we additionally color-code the subspaces based on similarity. The idea is to project the distance matrix into three-dimensional space, with each dimension representing a variable in the RGB color space.
+
+% After all the countries and islands are built (\autoref{fig:layout}d), we need to make the layout compact (\autoref{fig:layout}e). We detect empty rows and columns in the grids. For empty rows, we move the grids above them down. For empty columns, we move the grids on their left to the right. Then we center and enlarge the remaining grids to fit the screen (Algorithm~\autoref{alg:layout}-Step 3). In the compact layout, the relative positions between countries and islands have changed, causing the similarity between them not to be well conveyed through their positional relationships. To cope with this problem, we additionally color-encode subspaces based on their similarities. The idea is to project the distance matrix into three-dimensional space through MDS, each dimension representing a variable in the RGB color space.
+\subsubsection{Additional Map Metaphors}
+Once the map layout is generated, additional map metaphors, including capital cities, routes, and natural factors, are created to make the map more informative (\autoref{fig:layout}f).
+
+The representative subspace of a country or a province is selected as the national capital or provincial capital, respectively. The national capital can also be chosen as the provincial capital. There are three kinds of routes. The flight route supports users to travel between any two cities, the land route connects capital cities of the same country, and the sea routes connects port cities of different countries. The latter two routes are derived by calculating the path that minimizes the distance between the start and end points. To avoid clutter, we further apply minimum spanning tree to reduce the number of land and sea routes. The contained dimensions and dimension stability constitute the natural factors of a city.
+
+% The representative subspace of a country or a province is selected as the national capital or provincial capital, respectively. The national capital can also be chosen as the provincial capital. There are three kinds of routes. The flight route supports users to travel between any two cities, the land route connects capital cities of the same country, and the sea routes connects port cities of different countries. The latter two routes are derived by calculating the path that minimizes the distance between the start and end points. If a country has $n$ capital cities, then each of them is connected by $n(n-1)/2$ land routes. We further apply minimum spanning tree to reduce clutter. The dimensions contained, as well as the dimension stability, constitute the natural factors of a city.
+
+Because of the importance of the city landscape (i.e. the data pattern), we do not embed it in the map but rather display it in another view.
+
+\begin{algorithm}[!htb]
+\caption{Map Layout Algorithm}
+\label{alg:layout}
+\begin{algorithmic}[1]
+\Require 
+\Statex A hexagonal map $Map$;
+\Statex A list of anchor points $V[i]$ with initialized locations $V[i].loc, i = 1, 2 ... N_a$, $N_a$ is the number of anchor points;
+% \Statex A list of traversal order for anchor points $T_{Vi}, i = 1, 2 ... N_a$;
+\Statex A list of traversal order lists for countries and islands $T[i], i = 1, 2 ... N_a$;
+\Statex A list of city-province objects for countries and islands $O[i], i = 1, 2 ... N_a$;
+
+\Ensure 
+\Statex A list of hexagonal grid lists $V[i]^{'}$ for countries and islands, with assigned locations $V[i]^{'}.loc , i= 1, 2 ... N_a$;
+
+\For{$i = 0; i < N_a; i++$}
+  \State $V^{'}[i]$.push($V[i]$)
+\EndFor
+
+\For{$i = 0; i < N_a; i++$}
+  \If{$T[i].length == 1$} \Comment{This is an island}
+    \State continue
+  \EndIf
+  \State // Step 1: Calculate the disabled grid list
+  \State $G_{disabled}$ = []
+  \For{$j = 0; j < N_a \&\& j != i; j++$}
+    % \For{$k = 0; k < V^{'}[j].length; k++$}
+    %   \For{each adjacent grid $g$ of $V^{'}[j][k]$}
+    %     \If{$g$ is empty}
+    %       \State $G_{disabled}$.push($g$)
+    %     \EndIf
+    %   \EndFor
+    % \EndFor
+    \State Calculate the adjacent grids $G_{adjacent}$ of $V^{'}[j]$
+    \State $G_{disabled}$.concat($G_{adjacent}$)
+  \EndFor
+  \State // Step 2: Maintain the location queue $Q$
+  \For{$j = 0; j < T[i].length - 1; j++$}
+    \For{each adjacent grid $g$ of $T[i][j]$}
+    \If{$g$ is not in $G_{disabled}$ \&\& $g$ is empty}
+      \State $Q$.enqueue($g$)
+    \EndIf
+    \State $V^{'}[i]$.push($Q$.dequeue())
+    \If{$j > 0 \&\& O[i][j] != O[i][j - 1]$} \Comment{Two cities belong to different provinces}
+      \State $Q$.clear()
+    \EndIf
+    \EndFor
+  \EndFor
+\EndFor
+
+\State // Step 3: Make the map compact
+% \For{each empty row / column in $Map$}
+%   \If{no bordering after removal}
+%     \State Remove row / column
+%   \EndIf
+% \EndFor
+\State Remove empty rows/columns not causing bordering
+\State Center and enlarge $Map$
+
+\end{algorithmic}
+\end{algorithm}

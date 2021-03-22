@@ -1,0 +1,149 @@
+\section{Evaluation}
+\label{section:evaluation}
+In this section, we demonstrate the effectiveness of Subspace-Map with two real-world datasets. A comparison with the other four state-of-the-art approaches is also conducted.
+
+\subsection{Case 1: Forest Fires Data}
+
+The Forest Fires dataset~\cite{cortez2007d} contains 517 instances collected from Montesinho Natural Park in Portugal. It has been used by J{\"{a}}ckle et al.~\cite{DBLP:conf/ieeevast/JackleHBKS17} for case study. The park is divided into 72 regions. Each instance records the date and the region of a specific forest fire, along with 8 environmental monitoring factors: \textit{Temperature (temp)}, \textit{Relative Humidity (RH)}, \textit{Wind speed (Wind)}, \textit{Rainfall (Rain)}, \textit{Fine Fuel Moisture Code (FFMC)}, \textit{Duff Moisture Code (DMC)}, \textit{Drought Code (DC)}, and \textit{Initial Spread Index (ISI)}. These factors come from the Forest fire Weather Index (FWI), an index system widely used by domain scientists to estimate the risk of wildfire. By excluding all 1D subspaces, we have obtained altogether 247 subspaces.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\linewidth]{case1_countryA}
+\caption{Forest Fire Data: the analysis of cluster A. A can be divided into four sub-clusters. \textit{RH} and \textit{temp} are dominating the clustering at this level. \textit{DMC} and \textit{ISI} also plays a part in some sub-clusters. Judging from Subspace List View, \textit{temp} does not stand out in sub-cluster 4.}
+\label{fig:case1_country A}
+\end{figure*}
+
+\begin{figure*}[tb]
+\centering
+\includegraphics[width=\linewidth]{case1_ground_travel}
+\caption{Forest Fire Data: pattern transitions in cluster A. The travel route goes through 14 cities across 4 provinces, allowing users to browse the gradual change of patterns. It is worth noticing that subspace 9 to 11 present quite different data patterns.}
+\label{fig:case1_ground_travel}
+\end{figure*}
+
+\autoref{fig:interface} shows an overview. Two countries can be observed from the map, meaning that the subspaces form two major clusters. From Map Detail View (\autoref{fig:interface}c), we can see that \textit{Wind} is the dominating dimension at the national level. Most subspaces in country A include \textit{Wind} while things are the opposite for country B. Comparing the two projections, we know that data points are more likely to form a high-density cluster in the subspaces of country B. Moreover, the projection of A has less high-opacity points, suggesting that data structures are less stable in country A.
+
+%From Map Detail View, we can see that country A has more data points with low opacity, suggesting that the data becomes less stable than country B. On the other side, the projected points of country A are scattered, while the projection of country B presents a large cluster. To reason about the dominating dimensions, we compare their dimension stability. We see that both countries have only one featured dimension, and their featured dimension is the same. The featured dimension \textit{Wind} is commonly included in country A, while commonly excluded by country B. We therefore consider this dimension to play a decisive role in causing the pattern changes between the two countries.
+
+Curious about the inner division of cluster A, we then move on to the provincial level to continue the analysis. The map shows that A can be divided into four provinces, i.e. 4 sub-clusters (\autoref{fig:case1_country A}). Among them, sub-cluster 4 is significantly larger than the other three. Seen from Map Detail View, dimensions \textit{RH} and \textit{temp} play a decisive role in the division of provinces. Specifically, \textit{RH} contributes to most subspaces in sub-cluster 4 while it is commonly excluded by sub-cluster 1 to 3. \textit{temp} along with \textit{ISI} and \textit{DMC} helps distinguish the 3 small sub-clusters. The projected data structures appear more clustered in sub-cluster 2 and 4 due to the existence of a few extreme instances. From the list view, we can see that \textit{RH} and \textit{Wind} are dominating sub-cluster 4 with the same amount of occurrences. The other dimensions are equally included with less contributions. It validates the insight previously provided by Map Detail View.
+
+%Then we analyze these two countries one by one. For country A, the dimension \textit{RH} divides its four provinces into two parts. The first three provinces commonly exclude it while the forth province commonly includes it. We can see that the forth province presents a large cluster in the projection, making it different from the first and third provinces. And it contains fewer high-stability data points than the second province. Furthermore, the projections of the first three provinces indicate that the second province is significantly different from the other two, which can be seen from the fact that the second province commonly excludes the dimension \textit{temp} while the other two commonly include it. The dimension \textit{DMC} also helps distinguish them. Following, we see that the dimension \textit{ISI} is commonly excluded by the first province, which causes the stability of some data points varies compared to the third province. However, since the dimension \textit{ISI} is not a featured dimension of the third dimension, the difference is not so obvious.
+
+%For country B, the dimension \textit{temp} and \textit{RH} become the featured dimensions of the provinces. We see that the dimension \textit{RH} is commonly included in the third province, but is commonly excluded by the first two provinces. This results in the projected cluster shape of the third province being different from that of the first two provinces, and its data is the most unstable among the three provinces. Next, we see that the first province commonly includes the dimension \textit{temp} while the second province commonly excludes it. Although their projections look similar, the data stability of the first province is significantly higher than that of the second province.
+
+Before proceeding to the next step, we would like to probe into the semantics behind the above findings. In the FWI system, \textit{temp}, \textit{RH}, \textit{Wind}, and \textit{Rain} are four recorded natural factors used to generate the other four indicators. \textit{FFMC}, \textit{DMC}, and \textit{DC} reflect water contents in different levels of surface coverings. \textit{ISI} is derived from \textit{FFMC} to indicate how fast a wildfire may spread. \textit{RH} and \textit{temp} directly impact the three water content indicators. It explains why they dominate the provincial-level clustering. As for \textit{Wind}, its decisive role is simply due to its high independence to other dimensions. The climate of Portugal is characterized by hot and dry summers, cold and wet winters. \textit{RH} and \textit{temp} are strongly correlated. They vary with seasons but are similar across different regions. \textit{Wind}, on the other hand, is more affected by topography but less related to seasons. It is simply the most informative dimension since it cannot be derived or approximated by other indicators. 
+%It explains why its involvement heavily affects the entire data structure.
+
+Knowing the features of each sub-cluster, we can further explore how patterns change across these sub-clusters by traveling along the routes. We switch to the ground-travel mode and set the transition path to go over all provincial capitals (\autoref{fig:case1_ground_travel}). Altogether 14 subspaces have been visited along the route. Subspace 1 and 2 are highly similar with scattered projections. Subspace 3 is an outlier with abrupt pattern changes. Subspace 4 to 8 belong to sub-cluster 2 and well present the gradual changes in data patterns. Subspace 9 to 11 of sub-cluster 3 do not look very consistent. Subspace 12 to 14 show how data pattern varies from scattered to clustered. 
+
+%During the analysis, we find that the distribution of the featured dimensions in country A is more complicated than in country B. To investigate it in more detail, we then switch to travel on the ground mode. We set the capital of the first province as the starting point, the capital of the forth province as the ending point, and trace the pattern transitions of the cities along the way (\autoref{fig:case1_ground_travel}). There are 14 cities visited. We can see that the projections of these cities have gone through a process from scattered to clustered, then dispersed, and finally re-clustered, which corresponds to the country being divided into four provinces. In addition, we see that these cities have considerable featured dimensions, which confirms that the dimension stability distribution in this country is quite complicated. However, on the other hand, as the dimension stability measures the co-occurrence and co-non-occurrence of the dimension between the subspace and its $k_s$-NN subspaces, this phenomenon also indicates that these cities are in a relatively stable state.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=1\columnwidth]{case1_local}
+\caption{Forest Fire Data: local patterns within sub-cluster A-3. (a) For each subspace, we show its dimensions in a glyph style. However, it is hard to find trends visually. (b) Therefore, we highlight shared dimension patterns in different neighborhoods for better perception. Subspace 9 to 11 shows different patterns, which explains their data diversity.}
+\label{fig:case1_local}
+\end{figure}
+
+In order to find out why subspace 9 to 11 have different data patterns, we navigate to the municipal level of province 3 (\autoref{fig:case1_local}). \autoref{fig:case1_local}a shows the dimensions of all subspaces in a glyph style. However, it is difficult to visually find the trends. For each subspace, we highlight the common dimension patterns in its neighborhood, resulting in a better visual effect in \autoref{fig:case1_local}b. Note that it does not change the design in \autoref{fig:case1_local}a, but simply displays different dimensions with different opacity. 
+%Also note that patterns are derived based on true neighbors of each subspace, rather than the map neighbors. 
+Now we see that there exist several dimension patterns inside sub-cluster 3. Subspace 9, 10, and 11 exhibit 3 local patterns with different states of \textit{ISI}, which explains the diversity in their data patterns. Highlighted in the figure are two most popular patterns. They come from split regions, suggesting that some neighborhoods are separated in the map. It is a flaw in the layout algorithm, which will be discussed in~\autoref{section:discussion}.
+
+\subsection{Case 2: Glass Identification Data}
+The Glass Identification dataset~\cite{Dua:2019} contains 9 kinds of measurements for 214 glass samples. All glass samples have been divided into 6 classes: float-processed building windows, non-float-processed building windows, float-processed vehicle windows, containers, tableware, and headlamps. The measurements include \textit{refractive index (RI)} and 8 types of oxide contents: \textit{sodium (Na)}, \textit{magnesium (Mg)}, \textit{aluminum (Al)}, \textit{silicon (Si)}, \textit{potassium (K)}, \textit{calcium (Ca)}, \textit{barium (Ba)}, and \textit{iron (Fe)}. The 9 factors generate altogether 502 subspaces with no less than 2 dimensions. The map is formed by a randomly selected subset of 277 subspaces.
+
+\begin{figure*}[tb]
+\centering
+\includegraphics[width=\linewidth]{case2}
+\caption{Glass Identification Data: a comprehensive analysis. The subspaces form two clusters featuring \textit{Fe}. Cluster A has 4 sub-clusters while B has 7 sub-clusters. \textit{Na}, \textit{Si}, and \textit{Al} are the most featured dimensions at the provincial level. Most sub-clusters in A featured a linear data structure.}
+\label{fig:case2}
+\end{figure*}
+
+%We also conduct a case study on the Glass Identification dataset~\cite{Dua:2019}. The dataset defines 6 types of glass in terms of their \textit{refractive index (RI)} as well as the oxide content (i.e. \textit{Na}, \textit{Mg}, \textit{Al}, \textit{Si}, \textit{K}, \textit{Ca}, \textit{Ba}, and \textit{Fe}). After removing the class information, it contains 214 data items and 9 dimensions. To ease users' exploration burden, we sample 277 out of 502 subspaces.
+
+In the Map View, we can see that the subspaces are divided into two clusters. \textit{Fe} is the unique featured dimension for both clusters. Most subspaces in cluster A involve iron while the opposite happens in cluster B. By comparing the stability matrices, we find that the featured stable data is similar between these two clusters. Judging from the projections, the featured data is more clustered in A.
+
+%We load the preprocessed data into our system (\autoref{fig:case2}). In the Map View, we see that two countries are generated. We then check the Map Detail View, trying to find the differences between them and what makes them different. The data stability of country A is lower than that of country B. And although there exists a large cluster in the projections of both countries, they have different shapes. From the dimension stability distribution, apart from the featured dimension \textit{Fe}, there are no other significant differences between the two countries. We therefore identify this dimension being decisive for their pattern changes.
+
+At the provincial level, A is divided into 4 sub-clusters. All sub-clusters share one featured dimension: \textit{Na}. Specifically, sub-cluster 1 to 3 exclude \textit{Na} while sub-cluster 4 is characterized by involving it. The stability patterns are similar for sub-cluster 2 to 4, which focus on the lower half of the stability matrix. For sub-cluster 1, more stable data are involved in the upper part of the matrix. Judging from the projections, sub-cluster 1 to 3 share a highly similar data pattern featured by the linear alignment of data points. Sub-cluster 4 loses the linear feature and becomes more scattered.
+
+%Country A is divided into four provinces. As can be seen from their projections, the first three provinces have a band-like distribution of data, while the forth province does not. This can be explained by the fact that the first three provinces commonly exclude the dimension \textit{Na} while the forth province commonly includes it. Furthermore, for the first three provinces, the dimensions \textit{RI}, \textit{Al}, and \textit{Si} make them different in terms of data stability and compactness of the band data distribution in the projection.
+
+Without considering \textit{Fe}, the linear structure simply disappears in cluster B. In its 7 sub-clusters, 3 dimensions stand out to be the common featured dimensions: \textit{Na}, \textit{Al}, and \textit{Si}. They are also featured dimensions in the sub-clusters of A. \textit{RI} is also featured, but only appears in sub-cluster B-6 and A-1. Data patterns in B show a gradual change along the travel route passing through all provincial capitals. Specifically, more of the upper part data is involved as the stable structure, judging from the stability matrices. B-1 highlights only a few items, while B-7 highlights most of the data.
+
+To comprehend the above observations, we seek help from the domain of glass manufacturing. It turns out that iron has a critical impact on the property of glass. The clarity of glass improves along with the decrease of iron oxide. Low-iron glass, also known as ultra-clear glass, is a specific type of glass very suitable for making optical and lighting equipment. Apparently, some glass samples in this dataset are low-iron glass while the others are standard glass. The two types are so close in the other measurements such that they can hardly be separated without considering iron. The discrimination effect of iron makes it highly informative. It explains why \textit{Fe} dominates the national level clustering.
+
+Then we focus on the featured data. It turns out the lower part of the stability matrix corresponds to three classes of glass: containers, tableware, and headlamps. Their samples exhibit a remarkably lower level of iron contents (with an average of 0.023) than the other classes (with an average of 0.068). An intuitive explanation is that glass for buildings and vehicle windows has lower clarity requirements than lamps and glassware. In fact, most samples of the 3 classes of low-iron glass contain 0 iron oxide. It explains the linear data structure highlighted in the sub-clusters of A.
+
+As for \textit{Na}, \textit{Al}, and \textit{Si}, we find that these factors help to distinguish between the three classes of low-iron glass. Specifically, Container glass is featured by low \textit{Na}, high \textit{Al}, and low \textit{Si}. Tableware glass is featured by high \textit{Na}, low \textit{Al}, and low \textit{Si}. All three elements are relatively high for headlamps. It explains why these attributes stand out at the provincial level, with the low-iron glass being the featured data.
+
+%Country B is divided into seven provinces. Although it is more complicated, it can still be explained by the stability of the dimensions \textit{RI}, \textit{Na}, \textit{Al}, and \textit{Si}, which is similar to country A. Furthermore, we find that there are a large number of cities that do not belong to any province (i.e. municipalities) on the right side of the leftmost province. First of all, the colors of these cities are not as consistent as those of cities in the same province, indicating that they are not very similar. To analyze them in more detail, we switch to the air-travel mode and travel between them (\autoref{fig:case2_air_travel}). We can see that some of their projections are scattered and some of their projections present clusters. For those projections where clusters exist, there is a huge difference in the shape and compactness of the clusters. In addition, their data stability also varies a lot.
+
+\subsection{Comparison with State-of-the-Art Methods}
+
+We provide a comparison between our proposed method and four relevant approaches: Dimension Projection Matrix/Tree~\cite{DBLP:journals/tvcg/YuanRWG13}, Subspace Search and Visualization~\cite{DBLP:conf/ieeevast/TatuMFBSSK12}, TripAdvisor$^{ND}$~\cite{DBLP:journals/tvcg/NamM13}, and Pattern Trails~\cite{DBLP:conf/ieeevast/JackleHBKS17}. The comparison is made from five perspectives, namely subspace search strategy, similarity measure, subspace grouping strategy, subspace layout, and pattern detection strategy (\autoref{table:comparison}).
+
+\begin{table*}[]
+% \renewcommand\arraystretch{1}
+\center
+\caption{Comparison of our work with four state-of-the-art approaches.}
+\label{table:comparison}
+\resizebox{\textwidth}{20mm}{
+\begin{tabular}{@{}llllll@{}}
+\toprule
+    &
+    Subspace search strategy &
+    Similarity measure &
+    Subspace grouping strategy &
+    Subspace layout &
+    Pattern detection strategy \\ \midrule
+\begin{tabular}[c]{@{}l@{}}Dimension Projection \\ Matrix/Tree~\cite{DBLP:journals/tvcg/YuanRWG13}\end{tabular} &
+    Manual selection &
+    None &
+    None &
+    Tree and matrix &
+    Observation and manual brushing \\
+\specialrule{0.25pt}{1pt}{1pt}
+\begin{tabular}[c]{@{}l@{}}Subspace Search and \\ Visualization~\cite{DBLP:conf/ieeevast/TatuMFBSSK12}\end{tabular} &
+    Subspace clustering algorithm &
+    \begin{tabular}[c]{@{}l@{}}Dimension overlap and \\ data topology\end{tabular} &
+    \begin{tabular}[c]{@{}l@{}}Dimension distribution and \\ representative subspace\end{tabular} &
+    2D projection &
+    Observation and manual brushing \\
+\specialrule{0.25pt}{1pt}{1pt}
+TripAdvisor$^{ND}$~\cite{DBLP:journals/tvcg/NamM13} &
+    \begin{tabular}[c]{@{}l@{}}Subspace clustering algorithm \\ and manual selection\end{tabular} &
+    Dimension vectors &
+    None &
+    2D projection &
+    Observation and manual adjustment \\
+\specialrule{0.25pt}{1pt}{1pt}
+Pattern Trails~\cite{DBLP:conf/ieeevast/JackleHBKS17} &
+    Subspace clustering algorithm &
+    Projected distance of data &
+    \begin{tabular}[c]{@{}l@{}}Dimension union of the cluster and \\ subspace formed by the union\end{tabular} &
+    1D projection &
+    \begin{tabular}[c]{@{}l@{}}Automatic detection based on \\ clusters between adjacent subspaces\end{tabular} \\
+\specialrule{0.25pt}{1pt}{1pt}
+Ours &
+    Self-design sampling method &
+    Data topology &
+    \begin{tabular}[c]{@{}l@{}}Representative subspace, data \\ stability, and featured dimensions\end{tabular} &
+    Map layout &
+    \begin{tabular}[c]{@{}l@{}}Automatic detection by 1) dimension \\ and data features of subspaces and \\ clusters and 2) pattern transition routes\end{tabular} \\ \bottomrule
+\end{tabular}}
+\end{table*}
+
+\textbf{Subspace search strategy.}
+% Dimension Projection Matrix/Tree provides a dual analysis of dimension space and data space. It supports users to create subspaces by manually brushing dimensions of interest based on the dimension projection. However, such trial-and-error process is time-consuming.
+Three approaches use or partially use subspace clustering algorithms to generate subspaces. To ensure the diversity and representativeness, we generate subspaces by controlling the sampling frequency of dimension combinations and dimensions. The sampling strategy is further discussed in~\autoref{section:discussion}.
+% Three approaches use or partially use subspace clustering algorithms to generate subspaces. On the contrary, we generate subspaces by controlling the sampling frequency of dimension combinations and dimensions, thus ensure the diversity and representativeness of the results. The sampling strategy is further discussed in~\autoref{section:discussion}.
+
+\textbf{Similarity measure.} To make subspaces with different dimensionalities comparable, TripAdvisor$^{ND}$ computes the Euclidean distance between the dimension vectors. Such dimension-based approach does not characterize the similarity well, since small changes in dimensions can cause huge differences in data patterns. On the other hand, it suffers from information loss due to projection. Pattern Trails is based on the projected distance of data, which is also affected by information loss. Subspace Search and Visualization computes resemblance in the data topology, which is not affected by dimensionality and does not cause information loss. We use the same method as it.
+
+\textbf{Subspace grouping strategy.}
+% Only two methods support subspace grouping.
+Pattern Trails takes the union of dimensions within a cluster as the dimension of the cluster and compute the projection accordingly to represent the cluster. It is not reasonable because dimension distribution is not considered. Subspace Search and Visualization selects the representative subspace and computes the dimension distribution of the cluster. We provide richer information, including data stability, dimension stability, and featured dimensions of the cluster.
+
+\textbf{Subspace layout.} Dimension Projection Matrix/Tree hierarchically organizes views in a tree layout, where nodes can be matrices representing both dimension and data aspects. It supports exploration in a dual and recursive manner. However, it hides the relationship between subspaces and is not very visually scalable. The other three methods use a projection layout. Although the relationship between subspaces can be conveyed, there may be severe visual occlusion. We use a easy-to-understand map layout. It displays the relationship relatively accurately and allocates the same screen space to each subspace, thus allowing embedding more additional information.
+
+\textbf{Pattern detection strategy.} The first three methods support manual exploration only. Pattern Trails provides automatic pattern detection. It computes clusters for each subspace projection and identifies transition patterns based on cluster changes between two adjacent subspaces. This strategy is not scalable and, as seen in the example, can only identify a small number of existing patterns. We provide featured dimensions and data stability of clusters to help users quickly identify the impact of dimensions on data patterns. On the other hand, we present the dimension stability of individual subspaces to help users identify local patterns within clusters. Routes are also provided to trace pattern transitions in a gradual style.

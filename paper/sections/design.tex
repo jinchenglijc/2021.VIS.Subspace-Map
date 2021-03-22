@@ -1,0 +1,91 @@
+\section{The Design of Subspace-Map}
+In this section, we first discuss our design considerations and why we eventually choose to adopt a map-like representation. We then introduce the visual encoding methods and explain how the design considerations are met.
+% Then we show the basic idea of the approach by demonstrating the metaphors we use when constructing the map. Meanwhile, we will explain how the design considerations are met.
+
+\subsection{Design Considerations}
+We identify a set of design considerations to better analyze subspaces.
+
+\textbf{DC1: Reduce the number of displayed subspaces.} The number of subspaces scales exponentially with the increase of data dimensionality. Displaying subspaces is easily limited by the display space and the users' cognitive ability as dimensionality increases.
+% But still, users should be able to access information about individual subspaces during exploration.
+To cope with the scalability problem, we need to reduce the number of displayed subspaces. We also need to ensure the representativeness of the samples.
+
+\textbf{DC2: Provide an overview of the displayed subspaces.} The visual representation should reflect the overall relationship between subspaces and provide informative cues for the following exploration. It should be easy to perceive and understand. Moreover, to improve scalability, it should make space efficient.
+
+\textbf{DC3: Group subspaces and identify representative ones.} Clustering groups subspaces based on their mutual similarity, which is an effective way to reveal salient data and dimension patterns. For each group of subspaces, we should select a representative subspace to reduce potential redundancy and describe its main features.
+
+\textbf{DC4: Support dimension and data analysis of subspace clusters and subspaces.} Subspace analysis needs to consider both dimension and data aspects. For subspace clusters, we aim to reveal the complex dimension-data interplay. More specifically, we want to know their common dimensions and data patterns, and figure out which part of the data causes the subspaces to be similar or dissimilar, and which dimensions are responsible. For individual subspaces, users should be able to access information about them for more detailed analysis.
+
+\textbf{DC5: Provide guidance for subspace exploration.} Extracting representative subspaces from clusters is one way to guide user exploration. On the other side, abrupt changes between highly different subspaces can easily lead to confusion.
+% In order to make things easy to understand, it is necessary to provide an incremental schema in which users can trace pattern transitions between subspaces in a gradual style.
+To help users understand pattern transitions between subspaces, we need to recommend paths where data patterns change in a gradual style.
+
+% We identify our design considerations based on the three goals set in~\autoref{sect:introduction}. 
+
+% Firstly, we aim to visualize the enormous exploration space of subspaces (G1). Given the simplicity of one-dimensional subspaces, we only take into account subspaces with at least two dimensions. An $n$-dimensional dataset has altogether $2^n-n-1$ possibilities. When $n$ increases, displaying them is easily limited by the display space and users' cognitive ability. But still, users should be able to get the information of individual subspaces in the exploration. In order to cope with the scalability issue, we need to cut down the possibilities, as well as to fully utilize the display space.
+
+% Cutting down the possibilities means to down-sample the subspaces to an acceptable scale while maintaining the representativeness of the samples (D1). In order to make full use of the display space, we need a scalable way to visualize a large number of subspace samples in a 2D layout (D2). We do not use 1D alignment~\cite{DBLP:conf/ieeevast/JackleHBKS17} due to the lack of visual capacity. 3D is also not considered due to the additional cognition and interaction costs. In addition, we hope to show the relationship between subspaces in a way that is easy to perceive and understand (D3). Since this relationship is unlikely to be linear, the 2D layout is also more competent than 1D alignment.
+
+% As the second goal, we aim to reveal the interplay between dimensions and data structures (G2). More specifically, we want to know which part of the data causes the subspaces to be similar or different, and which dimensions are responsible for it (D4). This is crucial to the selection of dimensions. During the analysis process, users are usually interested in certain parts of the data features, and they can remain as long as the critical dimensions are maintained. Such a strategy not only gives users the freedom to choose among alternative subspaces but largely reduces the uncertainty of the enormous exploration space.
+
+% At the same time, we aim to provide guidance for subspace exploration (G3). To this end, we need to extract representative subspaces so that users can get an overview in a short time. This strategy is consistent with the first design consideration (D1). On the other side, abrupt changes between highly different subspaces can easily lead to confusion. In order to make things easy to understand, it is necessary to provide an incremental schema in which users can observe the pattern transition from one subspace to another (D5). Rolling the Dice proposed by Elmqvist et al.~\cite{DBLP:journals/tvcg/ElmqvistDF08} is a typical case of this transition. It drafts a series of subtle animations between any two scatterplots, each of which alters only one dimension to reduce users' cognitive burden.
+
+% To sum up, 5 design considerations are derived in order to develop our system:
+% \begin{itemize}
+% \item \textbf{D1} The possible subspaces should be down-sampled to extract the representative ones.
+% \item \textbf{D2} An efficient and scalable 2D layout is required to visualize the subspaces.
+% \item \textbf{D3} The layout of subspaces should reflect their relationships in a way that is easy to perceive and understand.
+% \item \textbf{D4} We need to reveal the critical data and dimensions that are responsible for the subspaces to be similar or different.
+% \item \textbf{D5} An incremental exploration schema is needed to help users understand the transitions between subspaces.
+% \end{itemize}
+
+During the design process, we tried various schemes for the final visualization. A straightforward way is to present a 2D projection where each point represents a subspace. This approach allows intuitively visualizing the relationship between subspaces by the distance between points (DC2). However, it is easy to cause visual occlusion, and each subspace cannot be allocated the same enough space to encode more additional information.
+% However, it is easy to cause visual occlusion, and it is hard to encode more additional information therein.
+
+Then we considered an alternative map-like layout where subspaces are shown as neighboring areas. We found that many of the cartographic concepts fit well with our design considerations. Moreover, the low cognitive burden of maps helps users better understand the subspaces, as they typically learn to read maps in preschool~\cite{blades1998cross}. These reasons inspired us to fully embrace the notion of geographic map, which eventually developed into Subspace-Map.
+
+% Then we considered an alternative map-like layout where subspaces are shown as neighboring areas. We found that many of the cartographic concepts nicely meet the design requirements. It inspired us to fully embrace the notion of a geographic map, which eventually developed into Subspace-Map. Since the idea is built upon map metaphors, before introducing the algorithm and visualization details, we first clarify the critical notions in this section.
+
+\subsection{Visual Encoding}
+\label{subsection:visual_encoding}
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=1\columnwidth]{design}
+\caption{The visual encoding of Subspace-Map. Each hexagon represents a subspace. Each region represents a cluster of subspaces. Various map metaphors are utilized to make the map more informative.}
+\label{fig:design}
+\end{figure}
+
+In Subspace-Map, we treat the whole exploration space as an unknown \textbf{world} (\autoref{fig:design}) that is made up of many pieces of \textbf{land}. We visualization designers are like cartographers, exploiters and tour guides. 
+
+% In Subspace-Map, we treat the whole exploration space as an unknown \textbf{world} (\autoref{fig:design}). It contains many pieces of \textbf{land}, each of which is a hexagon cell and is used to represent a different subspace. We visualization designers are like cartographers, exploiters and tour guides. 
+
+\subsubsection{Geography}
+As cartographers, we need to measure the topography and draw a map to depict it. We construct the map by regular tiling, which have only one type of regular face. We do not use semi-regular or irregular tiling because we do not want to introduce any bias to the subspaces. Except for the difference in dimensionality, all subspaces have the same size data and comparable data relationships. They should be treated equally. In addition, regular tiling allocates the same space to each subspace, thus allowing to easily embed additional information into them. We further choose hexagonal tiling rather than triangular tiling or square tiling because hexagonal grids have the most neighbors (6 compared to 3 for triangular grids and 4 for square grids) and can better display the relationship between subspaces.
+
+Since it is a fictional world, there is no ground truth about how subspaces should be arranged. Based on the Gestalt Principles~\cite{spelke1990principles}, we assume that similar subspaces are closely placed, thereby reducing the perceptual burden on users (DC2). 
+We define the \textbf{landscape} as the data pattern for each subspace. It is usually of primary interest to \textbf{tourists} (i.e. users). Dimensions are analogous to \textbf{natural factors} that determine what the landscape will look like. We want to not only compare the landscapes, but also to understand which natural factors cause similarities and dissimilarities (DC4). Lands with similar landscapes will be joined together to form a \textbf{continent}, like the cold, dry Antarctica in the real world. Land that is not connected to other land becomes an \textbf{island}. \textbf{Oceans} are used to divide the continents, which have no specific meaning.
+
+% As cartographers, we need to measure the topography and draw a map to depict it. Since it is a fictional world, there is no such thing as the ``ground truth'' about how the subspaces should be arranged. Taking advantage of the Gestalt Principles~\cite{spelke1990principles}, we assume that similar subspaces are placed closely, thereby reducing users' perceptual burden (D2). It also coincides with our daily experience that nearby areas have similar scenes. Lands may be contiguous, forming a large \textbf{continent}, and those not contiguous with other lands become \textbf{islands}. Lands within the same continent have relatively stable features, just like the cold and dry Antarctica in the real world. \textbf{Oceans} have no specific meaning, they are used to divide various continents.
+
+% We define the \textbf{landscape} as the data structure in each subspace. It is usually the most concerned by \textbf{tourists} (i.e. users). Dimensions are analogous to \textbf{natural factors}, which decide how the landscapes would look like. We want not only to compare the landscapes, but also to understand which factors are responsible for the differences and similarities (D4).
+
+\subsubsection{Regions}
+As exploiters, we should establish cities and set up regions. We refer to \textbf{cities} as subspace samples obtained by sampling (DC1). However, even with sampling, there could still be too many cities. It is not possible or necessary for tourists to visit every city. Therefore we set up hierarchical \textbf{regions} to make exploration more effective. We describe each continent formed by similar subspaces as a \textbf{country}, which can be divided into \textbf{provinces} based on finer granularity of similarity. On the other hand, some cities within a country may not be so similar to other cities. We call them \textbf{municipalities}. For each country and province, we choose a \textbf{capital city} (national capital or provincial capital, respectively) to show its main features.
+
+To better organize these concepts, we have divided the Subspace-Map into three levels from top to bottom: \textbf{national}, \textbf{provincial}, and \textbf{municipal}. At the national level, countries and their national capitals are shown. Then at the next level (the provincial level), provinces and provincial capitals are displayed. At the municipal level, cities as well as their natural factors are presented.
+
+% As exploiters, we should establish cities and set up regions. We refer to ``\textbf{cities}'' as the subspace samples obtained via down-sampling (D1). However, even with the sampling, there could still be too many cities, and it is impossible and unnecessary for tourists to visit every city on the continent.
+
+% Now recall the first time you experienced a new culture abroad. How did you get to know the ancient Chinese art or get a taste of the French romance? It is very unlikely you visited every city in China or France. You probably just paid a visit to Beijing or Paris. It explains the necessity for hierarchical \textbf{regions}, which are critical for a more scalable journey (D3). We describe each continent that is formed by similar subspaces as a \textbf{country}, which could be divided into several \textbf{provinces} based on finer granularity of similarities. On the other side, some cities in a country may not be so similar to others, and we call them \textbf{municipalities}. For each country and province, a \textbf{capital city} (national capital or provincial capital, respectively) is chosen to show its main features.
+
+% In order to better organize these concepts, we divide Subspace-Map into three levels from top to bottom, namely \textbf{national level}, \textbf{provincial level}, and \textbf{municipal level}. At the national level, countries and their national capitals are displayed. Then in the next level (provincial level), provinces and provincial capitals are shown. And at the municipal level, cities as well as their natural factors are presented.
+
+\subsubsection{Transportation}
+
+As tour guides, it is our responsibility to plan a reasonable route for the trip (DC5). For long distance trips, \textbf{flight routes} are effective, by which tourists can easily travel to and from cities in different countries. During the trip, tourists may experience ``jet lag'' due to the swift changes in the environment. It corresponds to the confusion caused by sudden visual changes when users switch between highly different subspaces.
+
+Trips through \textbf{land routes} and \textbf{sea routes}, on the other hand, are slower, but more stable and comfortable. Land routes are used to connect neighboring cities within the country, and sea routes are used to connect port cities for cross-country transportation. Both kinds of transportation allow tourists to enjoy the landscape of the in-between cities. This makes it easier to accept the differences between origin and destination.
+
+% As tour guides, we have the responsibility to plan a reasonable route for any desired trip (D5). \textbf{Flight routes} are efficient for long-distance journeys, through which tourists can easily travel between various countries with the helicopter provided. During the trip, tourists may suffer from ``jet lag'' due to the swift environmental changes. It corresponds to the confusion caused by sudden visual changes when users try to switch between highly different subspaces.
+
+% Trips through \textbf{land routes} and \textbf{sea routes}, on the other hand, are slower but more steady and comfortable. Land routes such as railways are used to connect the neighboring cities within the country. Sea routes connect the port cities for transportations across countries. Both kinds of transportation allow the tourists to enjoy the landscape of the in-between cities. That makes it easier to accept the differences between the origin and the destination.
